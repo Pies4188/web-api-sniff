@@ -1,0 +1,13 @@
+{
+  "name": "你的平台名称（仅注释用，可中文）",
+  "base_url": "https://your-platform.example.com",
+  "scheme_hint": "https",
+  "auth": {
+    "mode": "bearer",
+    "token_env": "YOUR_PLATFORM_TOKEN",
+    "token_expr": "localStorage.getItem('token')",
+    "extra_headers": {}
+  },
+  "endpoints": [],
+  "notes": "复制本文件，改名为 <你的平台>.json（不要以 _ 开头，否则不会被识别为站点）。然后：\n1. base_url 填接口域名——浏览器 DevTools→Network 看任意数据请求发往哪个 host。\n2. scheme_hint 填 http 或 https；内网/老旧平台/很多物联网后台用 http，连 https 报 SSL EOF 就改 http。\n3. auth.mode 三选一：bearer / cookie / custom；token 三种取法（环境变量 / 凭证文件 / 浏览器自动读）见 sites/README.md。\n4. 用 find_endpoint.py <名> <关键词> 从前端 JS 定位接口，补进 endpoints。\n5. 用 sniff_api.py <名> get <path> 直连验证。\n签名类鉴权（AK/SK+Timestamp+Signature）走 custom 模式，详见 sites/README.md。"
+}
