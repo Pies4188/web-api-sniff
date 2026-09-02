@@ -1,0 +1,36 @@
+{
+  "name": "城小智",
+  "base_url": "http://chengxiaozhi.cc-pg.cn",
+  "scheme_hint": "http",
+  "auth": {
+    "mode": "bearer",
+    "token_env": "CXZ_TOKEN",
+    "creds_file": "cxz_creds.json",
+    "creds_key": "token",
+    "token_expr": "JSON.parse(sessionStorage.getItem('currentUser')).token",
+    "extra_headers": {
+      "x-ru-id": "8253bfcd-8da8-4bd5-b820-67d1bba52651"
+    },
+    "accept_language": "zh-CN"
+  },
+  "endpoints": [
+    {"action": "组织树", "method": "GET", "path": "/uc/api/org/v1/org/getUserAllAuthOrgTree?userId=<x-ru-id>&isTree=1&demCode="},
+    {"action": "主板计划性工单月度统计", "method": "GET", "path": "/dashboard/api/workorderMerge/v1/planWorkorderMonth/statistics?orgId=<orgId>&year=<year>&month=<month>"},
+    {"action": "维保月度统计", "method": "GET", "path": "/dashboard/api/maintain/statistics?orgId=&year=&month="},
+    {"action": "应急月度统计", "method": "GET", "path": "/dashboard/api/emergency/statistics?orgId=&year=&month="},
+    {"action": "维保工单列表", "method": "POST", "path": "/workOrder/api/v1/planWorkOrder/list/maintenance_flow"},
+    {"action": "维保工单详情", "method": "GET", "path": "/workOrder/api/v1/planWorkOrder/info/maintenance_flow/<procInstId>"},
+    {"action": "设备台账列表", "method": "POST", "path": "/building/api/deviceInfo/v1/deviceInfo/list"},
+    {"action": "设备台账详情", "method": "GET", "path": "/building/api/deviceInfo/v1/deviceInfo/get/<deviceId>"},
+    {"action": "人员列表", "method": "GET", "path": "/dashboard/api/person/infoList?orgId="},
+    {"action": "派单池(待派)", "method": "POST", "path": "/workOrder/dispatch/v1/selectAssignWorkOrderList"},
+    {"action": "批量派单", "method": "POST", "path": "/workOrder/dispatch/v1/batchAssignWorkOrder"},
+    {"action": "跟踪池(已派)", "method": "POST", "path": "/workOrder/dispatch/v1/selectTrackWorkOrderList"},
+    {"action": "批量转单", "method": "POST", "path": "/workOrder/dispatch/v1/batchTransWorkOrder"},
+    {"action": "审批池", "method": "POST", "path": "/workOrder/dispatch/v1/selectApproveWorkOrderList"},
+    {"action": "批量取消", "method": "POST", "path": "/workOrder/dispatch/v1/batchCancelWorkOrder"},
+    {"action": "批量延期", "method": "POST", "path": "/workOrder/dispatch/v1/batchDelayWorkOrder"},
+    {"action": "选处理人/协同人", "method": "GET", "path": "/user-center/api/usercenter/v1/ucUser/search/2?keyword="}
+  ],
+  "notes": "站点必须用 http（https 直连报 SSL: UNEXPECTED_EOF_WHILE_READING）；token 从浏览器 sessionStorage.currentUser.token 取；x-ru-id 为固定用户标识头；组织名三套不一致（Excel≠看板≠树名），一律按组织树精确名+区域匹配；设备台账 LIKE 需先按设备名精确相等过滤；维保列表按 orderNo 精确相等过滤（LIKE 仅召回）。"
+}
