@@ -1,0 +1,13 @@
+{
+  "name": "上海智慧电梯平台（维保管理系统）",
+  "base_url": "https://weibao.shse.info",
+  "scheme_hint": "https",
+  "auth": {
+    "mode": "bearer",
+    "token_env": "SH_ELEVATOR_TOKEN",
+    "token_expr": null,
+    "extra_headers": {}
+  },
+  "endpoints": [],
+  "notes": "上海市智慧电梯平台为多子系统 SPA，需维保单位或监管账号登录。\n子系统域名：\n  - 使用管理 https://shiyong.shse.info\n  - 维保管理 https://weibao.shse.info  （本配置 base_url，维保方最相关）\n  - 检验检测 https://jian.shse.info\n  - 监管端   https://gov.shse.info\n  - 综合入口 http://www.shse.info/\n适配步骤（待用户在浏览器登录后执行）：\n  1. bsk status 确认已连接上海平台会话；\n  2. 浏览器 Network 看任意请求头，确认 token 放在哪（Authorization / Cookie / 自定义头）与来源（sessionStorage/localStorage/cookie）→ 填 auth.mode + auth.token_expr；\n  3. python scripts/find_endpoint.py shanghai_elevator <关键词> 定位接口，补进 endpoints；\n  4. python scripts/sniff_api.py shanghai_elevator get <path> 验证。\n注意：上海平台多为 https，scheme_hint 用 https；若 urllib 直连报 SSL 问题再改 http。"
+}
